@@ -1,4 +1,4 @@
-import random
+from random import randint
 import typing as tp
 
 import pygame
