@@ -54,6 +54,7 @@ class GameOfLife:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
+            self.draw_grid()
             self.draw_lines()
 
             # Отрисовка списка клеток
@@ -91,7 +92,7 @@ class GameOfLife:
         if randomize:
             for i in range(self.cell_height):
                 for j in range(self.cell_width):
-                    array[i][j] = randint(0,99) % 2
+                    array[i][j] = randint(0, 99) % 2
         return array
 
     def draw_grid(self) -> None:
@@ -104,9 +105,9 @@ class GameOfLife:
                     color = pygame.Color('green')
                 else:
                     color = pygame.Color('white')
-                pygame.draw.rect(self.screen, color, j * self.cell_size,
+                pygame.draw.rect(self.screen, color, (j * self.cell_size,
                                  i * self.cell_size, self.cell_size,
-                                 self.cell_size)
+                                 self.cell_size))
 
     def get_neighbours(self, cell: Cell) -> Cells:
         """
@@ -149,7 +150,7 @@ class GameOfLife:
         for y in range(self.cell_height):
             for x in range(self.cell_width):
                 count_alive = sum(self.get_neighbours((y, x)))
-                if count_alive == 3 or count_alive == 2 and self.grid[y][x] == 1:
+                if count_alive == 3 or self.grid[y][x] == 1 and count_alive == 2:
                     new_grid[y][x] = 1
         self.grid = new_grid
         
