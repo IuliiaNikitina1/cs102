@@ -153,4 +153,5 @@ class GameOfLife:
                 if count_alive == 3 or self.grid[y][x] == 1 and count_alive == 2:
                     new_grid[y][x] = 1
         self.grid = new_grid
+        return new_grid
         
